@@ -1,0 +1,34 @@
+CC = gcc
+CFLAGS = -g -O2 
+LIBS = /users/cse533/Stevens/unpv13e/libunp.a 
+
+
+
+PROGS = ODR_abhmishra time_client_abhmishra
+
+all:    ${PROGS}
+
+ODR_abhmishra:    ODR_abhmishra.o get_hw_addrs.o
+	${CC} ${CFLAGS} -o ODR_abhmishra ODR_abhmishra.o get_hw_addrs.o ${LIBS} 
+
+time_client_abhmishra: time_client.o api_layer.o
+	${CC} ${CFLAGS} -o time_client_abhmishra time_client.o api_layer.o ${LIBS}
+
+ODR_abhmishra.o: ODR_abhmishra.c
+	${CC} ${CFLAGS} -c ODR_abhmishra.c
+
+get_hw_addrs.o: get_hw_addrs.c
+	${CC} ${CFLAGS} -c get_hw_addrs.c
+
+time_client.o: time_client.c
+	${CC} ${CFLAGS} -c time_client.c
+
+api_layer.o: api_layer.c
+	${CC} ${CFLAGS} -c api_layer.c
+
+
+clean:
+	rm -f ${PROGS} ${CLEANFILES}
+
+
+
